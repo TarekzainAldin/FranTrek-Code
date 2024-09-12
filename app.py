@@ -1,10 +1,15 @@
 from flask import Flask
 
-app = (__name__)
+app = Flask(__name__)
 
-@app.rout('/home')
-def home ():
-    return "welcom in the first main"
+
+@app.route('/')
+@app.route('/home')
+def home():
+    return "welcom in the first page "
+@app.route('/about_us')
+def about():
+    return ("this is the about page ")
 if __name__ == '__main__':
-    app.run(debuge=True)
+    app.run(debug=True)
     
