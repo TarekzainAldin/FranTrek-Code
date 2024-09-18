@@ -13,7 +13,7 @@ lessons=[{
     
         'title':'request html course',
         'course':'Html',
-        'authour':'ammar'
+        'authour':'francia'
    
 },
 
@@ -21,7 +21,7 @@ lessons=[{
     
         'title':'request datatime course',
         'course':'python',
-        'authour':'ziad '
+        'authour':'francia  '
    
 },
 ]
