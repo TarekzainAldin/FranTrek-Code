@@ -1,0 +1,11 @@
+
+{% extends "layout.html" %}
+
+{%block content %}
+
+    {% for lesson in lessons %}
+    <h1>{{lesson.title}}</h1>
+    <p>in:{{lesson.course}}</p>
+    <p> by :{{lesson.authour}}</p>
+    {% endfor %}
+{% endblock content %}

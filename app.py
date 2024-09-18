@@ -1,15 +1,38 @@
-from flask import Flask
+from flask import Flask, render_template, url_for
 
 app = Flask(__name__)
 
+lessons=[{
+    
+        'title':'request Libray course',
+        'course':'python',
+        'authour':'tarek'
+   
+},
+{
+    
+        'title':'request html course',
+        'course':'Html',
+        'authour':'ammar'
+   
+},
+
+{
+    
+        'title':'request datatime course',
+        'course':'python',
+        'authour':'ziad '
+   
+},
+]
 
 @app.route('/')
 @app.route('/home')
 def home():
-    return "welcom in the first page "
-@app.route('/about_us')
+    return render_template('home.html', lessons=lessons)
+@app.route('/about')
 def about():
-    return ("this is the about page ")
+    return render_template('about.html', title = "About")
 if __name__ == '__main__':
     app.run(debug=True)
     
