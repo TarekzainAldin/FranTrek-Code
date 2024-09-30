@@ -91,7 +91,7 @@ def register():
     form = RegistrationForm()
     return render_template('register.html',title= 'Regester',form=form)
 
-@app.rout('/login')
+@app.route('/login')
 def login():
     form = LoginForm()
     return render_template('login.html',title='Login',form= form)
