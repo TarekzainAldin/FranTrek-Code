@@ -86,7 +86,7 @@ def about():
     return render_template('about.html', title="About")
 
 
-@app.reout('/register')
+@app.route('/register')
 def register():
     form = RegistrationForm()
     return render_template('register.html',title= 'Regester',form=form)
