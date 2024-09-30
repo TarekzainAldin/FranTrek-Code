@@ -1,7 +1,7 @@
 from tokenize import String
-from flask_wtf import FlaskForm # type: ignore
-from wtforms import StringField, PasswordField, SubmitField, BooleanField # type: ignore
-from wtforms.validators import DataRequired, Length, Email, Regexp, EqualTo # type: ignore
+from flask_wtf import FlaskForm 
+from wtforms import StringField, PasswordField, SubmitField, BooleanField 
+from wtforms.validators import DataRequired, Length, Email, Regexp, EqualTo 
 
 
 class RegistrationForm(FlaskForm):
