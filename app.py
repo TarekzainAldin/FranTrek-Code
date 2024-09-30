@@ -1,6 +1,9 @@
 from flask import Flask, render_template, url_for
-
+from form import RegistrationForm, LoginForm
 app = Flask(__name__)
+app.config[
+    "SECRET_KEY"
+] = '16c749724f0c2920edea51b1b4e7af80f9a10f2ed97981830c0c9109f2370862'
 
 lessons = [{
     'title': 'Request Library Course',
@@ -83,5 +86,14 @@ def about():
     return render_template('about.html', title="About")
 
 
+@app.reout('/register')
+def register():
+    form = RegistrationForm()
+    return render_template('register.html',title= 'Regester',form=form)
+
+@app.rout('/login')
+def login():
+    form = LoginForm()
+    return render_template('login.html',title='Login',form= form)
 if __name__=="__main__":
     app.run(debug=True)
