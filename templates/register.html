@@ -8,7 +8,10 @@
             <div class="form-group">
                 {{ form.fname.label(class='form-control-label')}}
                 {% if form.fname.errors%}
+
+               
                 {{ form.fname(class='form-control form-control-lg is-invalid')}}
+               
                 <div class="invalid-feedback">
                     {% for error in form.fname.errors %}
                     <span>{{error}}</span>
