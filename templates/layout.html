@@ -37,9 +37,9 @@
                  <!---UserLink-->
                  <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a href="#register" class="nav-link">Register</a>
+                        <a href="{{url_for('register')}}" class="nav-link">Register</a>
                         <li class="nav-item">
-                            <a href="#login" class="nav-link">Login</a>
+                            <a href="{{url_for('login')}}" class="nav-link">Login</a>
                         </li>
                         <li class="nav-item">
                             <a href="#dashboard" class="nav-link">Dashboard</a>
@@ -51,9 +51,19 @@
         </div>
 
         </nav>
-
-    {%block content%} {% endblock %}
-
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{category}} text-center">
+            {{message}}
+        </div>
+        {% endfor %}
+    
+        {% endif %}
+        {% endwith %}
+        {% block content%} {% endblock %}
+        
+<!-- footer -->
     <footer class="bg-dark mt-auto " >
         <div class="container p-3">
             <div class="row text-center text-white">
