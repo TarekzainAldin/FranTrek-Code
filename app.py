@@ -9,6 +9,7 @@ app.config[
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///FranTrek.db'
 
 db=SQLAlchemy(app)
+app.app_context().push()
 
 lessons = [{
     'title': 'Request Library Course',
@@ -158,4 +159,6 @@ class Course(db.Model):
         return f"Course('{self.title}')"
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    #   with app.app_context():  # Make sure to create an app context
+    #    db.create_all()  
+ app.run(debug=True) 
