@@ -1,6 +1,7 @@
 from flask import Flask
-from datetime import datetime
-from flask_sqlalchemy import SQLAlchemy 
+from flask_sqlalchemy import SQLAlchemy
+from flask_bcrypt import Bcrypt
+from flask_login import LoginManager
 
 
 app = Flask(__name__)
@@ -9,8 +10,10 @@ app.config[
 ] = '16c749724f0c2920edea51b1b4e7af80f9a10f2ed97981830c0c9109f2370862'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///FranTrek.db'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
-
-db=SQLAlchemy(app)
-app.app_context().push()
+db = SQLAlchemy(app)
+bcrypt = Bcrypt(app)
+login_manager = LoginManager(app)
+login_manager.login_view = "login"
+login_manager.login_message_category = "info"
 
 from FranTrek import routes
