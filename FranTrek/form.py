@@ -9,7 +9,9 @@ from wtforms.validators import (
     EqualTo,
     ValidationError,
 )
+
 from FranTrek.models import User
+
 
 class RegistrationForm(FlaskForm):
     fname = StringField(

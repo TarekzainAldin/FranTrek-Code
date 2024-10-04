@@ -1,8 +1,9 @@
 
-from FranTrek import User, Lesson, Course
-from flask import  render_template, url_for ,flash,redirect, request
+from FranTrek.models import  User, Lesson, Course
+
+from flask import  render_template, url_for, flash, redirect, request
 from FranTrek.form import RegistrationForm, LoginForm
-from FranTrek import app , bcrypt, db
+from FranTrek import app, bcrypt, db
 from flask_login import (
     login_required,
     login_user,
