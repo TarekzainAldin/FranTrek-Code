@@ -1,7 +1,7 @@
 from FranTrek.models import User, Lesson, Course
 from flask import render_template, url_for, flash, redirect
 from FranTrek.form import RegistrationForm, LoginForm
-from FranTrek import app
+from FranTrek import app, bcrypt, db
 
 
 
@@ -91,10 +91,23 @@ def about():
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
+   
     form = RegistrationForm()
     if form.validate_on_submit():
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode(
+            "utf-8"
+        )
+        user = User(
+            fname=form.fname.data,
+            lname=form.lname.data,
+            username=form.username.data,
+            email=form.email.data,
+            password=hashed_password,
+        )
+        db.session.add(user)
+        db.session.commit()
         flash(f"Account created successfully for {form.username.data}", "success")
-        return redirect(url_for("home"))
+        return redirect(url_for("login"))
     return render_template("register.html", title="Register", form=form)
 
 
@@ -102,9 +115,10 @@ def register():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
+        
         if (
-            form.email.data == "omar@email.com"
-            and form.password.data == "PASS!!word123"
+            form.email.data == "tarek@email.com"
+            and form.password.data == "T123!!@tt"
         ):
             flash("You have been logged in!", "success")
             return redirect(url_for("home"))
