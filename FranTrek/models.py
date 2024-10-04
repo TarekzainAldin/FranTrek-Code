@@ -1,12 +1,7 @@
 from datetime import datetime
-from FranTrek import db, login_manager
-from flask_login import UserMixin
+from FranTrek import db
 
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(int(user_id))
-
-class User(db.Model, UserMixin):
+class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     fname = db.Column(db.String(25), nullable=False)
     lname = db.Column(db.String(25), nullable=False)
