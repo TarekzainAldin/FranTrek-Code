@@ -2,6 +2,7 @@ from FranTrek.models import User, Lesson, Course
 from flask import render_template, url_for, flash, redirect
 from FranTrek.form import RegistrationForm, LoginForm
 from FranTrek import app, bcrypt, db
+from flask_login import login_user
 
 
 
@@ -116,10 +117,9 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         
-        if (
-            form.email.data == "tarek@email.com"
-            and form.password.data == "T123!!@tt"
-        ):
+        user = User.query.filter_by(email=form.email.data).first()
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
+            login_user(user, remember=form.remember.data)
             flash("You have been logged in!", "success")
             return redirect(url_for("home"))
         else:
