@@ -11,7 +11,8 @@ class User(db.Model, UserMixin):
     lname = db.Column(db.String(25), nullable=False)
     username = db.Column(db.String(25), unique=True, nullable=False)
     email = db.Column(db.String(125), unique=True, nullable=False)
-    image_file = db.Column(db.String(20), nullable=False, default="default.jpg")
+    image_file = db.Column(db.String(20), nullable=False, default="default.png")
+    bio = db.Column(db.Text, nullable=True)
     password = db.Column(db.String(60), nullable=False)
     lessons = db.relationship("Lesson", backref="author", lazy=True)
 
