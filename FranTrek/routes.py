@@ -3,7 +3,7 @@ from PIL import Image
 import os
 from FranTrek.models import User, Lesson, Course
 from flask import render_template, url_for, flash, redirect, request
-from FranTrek.form import RegistrationForm, LoginForm, UpdatepfrofileForm
+from FranTrek.form import RegistrationForm, LoginForm, UpdateProfileForm
 from FranTrek import app, bcrypt, db
 from flask_login import  login_required, login_user ,current_user, logout_user, login_required
 
@@ -153,7 +153,7 @@ def logout():
 @app.route("/dashboard", methods=["GET", "POST"])
 @login_required
 def dashboard():
-    profile_form = UpdatepfrofileForm()
+    profile_form = UpdateProfileForm()
     if profile_form.validate_on_submit():
         if profile_form.picture.data:
             picture_file = save_picture(profile_form.picture.data)
