@@ -82,3 +82,5 @@ class UpdateProfileForm(FlaskForm):
                 raise ValidationError(
                     "Email already exists! Please chosse a different one"
                 )
+class NewLessonForm(FlaskForm):
+    submit = SubmitField("Lesson")
