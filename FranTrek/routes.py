@@ -2,8 +2,6 @@ import secrets
 from PIL import Image
 import os
 from FranTrek.models import User, Lesson, Course
-
-
 from flask import render_template, url_for, flash, redirect, request, session
 from FranTrek.form import (
     NewCourseForm,
