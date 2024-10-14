@@ -2,85 +2,99 @@ import secrets
 from PIL import Image
 import os
 from FranTrek.models import User, Lesson, Course
+
+
 from flask import render_template, url_for, flash, redirect, request, session
-from FranTrek.form import RegistrationForm, LoginForm, UpdateProfileForm, NewLessonForm,NewCourseForm
+from FranTrek.form import (
+    NewCourseForm,
+    NewLessonForm,
+    RegistrationForm,
+    LoginForm,
+    UpdateProfileForm,
+)
 from FranTrek import app, bcrypt, db
 from flask_modals import render_template_modal
-from flask_login import  login_required, login_user ,current_user, logout_user, login_required
+from flask_login import (
+    login_required,
+    login_user,
+    current_user,
+    logout_user,
+    login_required,
+)
 
 
-
-lessons = [{
-    'title': 'Request Library Course',
-    'course': 'Python',
-    'author': 'tarek',
-    'thumbnail': 'thumbnail.jpg'
-},
-{'title': 'Request Library Course',
-    'course': 'Python',
-    'author': 'tarek',
-    'thumbnail': 'thumbnail.jpg'
-},
-{'title': 'Request Library Course',
-    'course': 'Python',
-    'author': 'francia',
-    'thumbnail': 'thumbnail.jpg'
-},
-{'title': 'Request Library Course',
-    'course': 'Python',
-    'author': 'francia',
-    'thumbnail': 'thumbnail.jpg'
-},
-{'title': 'Request Library Course',
-    'course': 'Python',
-    'author': 'francia',
-    'thumbnail': 'thumbnail.jpg'
-},
-{'title': 'Request Library Course',
-    'course': 'Python',
-    'author': 'tarek',
-    'thumbnail': 'thumbnail.jpg'
-},
+lessons = [
+    {
+        "title": "Request Library Course",
+        "course": "Python",
+        "author": "tarek",
+        "thumbnail": "thumbnail.jpg",
+    },
+    {
+        "title": "Request Library Course",
+        "course": "Python",
+        "author": "tarek",
+        "thumbnail": "thumbnail.jpg",
+    },
+    {
+        "title": "Request Library Course",
+        "course": "Python",
+        "author": "tarek",
+        "thumbnail": "thumbnail.jpg",
+    },
+    {
+        "title": "Request Library Course",
+        "course": "Python",
+        "author": "tarek",
+        "thumbnail": "thumbnail.jpg",
+    },
+    {
+        "title": "Request Library Course",
+        "course": "Python",
+        "author": "tarek",
+        "thumbnail": "thumbnail.jpg",
+    },
+    {
+        "title": "Request Library Course",
+        "course": "Python",
+        "author": "tarek",
+        "thumbnail": "thumbnail.jpg",
+    },
 ]
 
 courses = [
-{
-        'name': 'Python',
-        'icon': 'python.svg',
-        'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque quidem nihil dolor officiis at magni!'
-    },
-
     {
-        'name': 'Data Analysis',
-        'icon': 'analysis.png',
-        'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque quidem nihil dolor officiis at magni!'
+        "name": "Python",
+        "icon": "python.svg",
+        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque quidem nihil dolor officiis at magni!",
     },
-
     {
-        'name': 'Machine Learning',
-        'icon': 'machine-learning.png',
-        'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque quidem nihil dolor officiis at magni!'
+        "name": "Data Analysis",
+        "icon": "analysis.png",
+        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque quidem nihil dolor officiis at magni!",
     },
-
-        {
-        'name': 'Web Design',
-        'icon': 'web.png',
-        'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque quidem nihil dolor officiis at magni!'
+    {
+        "name": "Machine Learning",
+        "icon": "machine-learning.png",
+        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque quidem nihil dolor officiis at magni!",
     },
-
-        {
-        'name': 'Blockchain',
-        'icon': 'blockchain.png',
-        'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque quidem nihil dolor officiis at magni!'
+    {
+        "name": "Web Design",
+        "icon": "web.png",
+        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque quidem nihil dolor officiis at magni!",
     },
-
-        {
-        'name': 'Tips & Tricks',
-        'icon': 'idea.png',
-        'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque quidem nihil dolor officiis at magni!'
+    {
+        "name": "Blockchain",
+        "icon": "blockchain.png",
+        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque quidem nihil dolor officiis at magni!",
     },
-
+    {
+        "name": "Tips & Tricks",
+        "icon": "idea.png",
+        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque quidem nihil dolor officiis at magni!",
+    },
 ]
+
 
 def save_picture(form_picture):
     random_hex = secrets.token_hex(8)
@@ -205,7 +219,7 @@ def profile():
 def new_lesson():
     new_lesson_form = NewLessonForm()
     new_course_form = NewCourseForm()
-    form = ""
+    form = ' '
     flag = session.pop("flag", False)
     if "content" in request.form:
         form = "new_lesson_form"
