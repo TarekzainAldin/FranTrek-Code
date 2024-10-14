@@ -184,10 +184,16 @@ def profile():
     )
 
 
+
+
+
 @app.route("/dashboard/new_lesson", methods=["GET", "POST"])
 @login_required
 def new_lesson():
     new_lesson_form = NewLessonForm()
+    if new_lesson_form.validate_on_submit():
+        flash("your lesson has been Created! ","success")
+        return redirect(url_for("home"))
     return render_template(
         "new_lesson.html",
         title="New Lesson",
