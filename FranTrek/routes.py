@@ -2,9 +2,10 @@ import secrets
 from PIL import Image
 import os
 from FranTrek.models import User, Lesson, Course
-from flask import render_template, url_for, flash, redirect, request
-from FranTrek.form import RegistrationForm, LoginForm, UpdateProfileForm, NewLessonForm
+from flask import render_template, url_for, flash, redirect, request, session
+from FranTrek.form import RegistrationForm, LoginForm, UpdateProfileForm, NewLessonForm,NewCourseForm
 from FranTrek import app, bcrypt, db
+from flask_modals import render_template_modal
 from flask_login import  login_required, login_user ,current_user, logout_user, login_required
 
 
@@ -191,21 +192,47 @@ def profile():
 @login_required
 def new_lesson():
     new_lesson_form = NewLessonForm()
-    if new_lesson_form.validate_on_submit():
+    new_course_form = NewCourseForm()
+    form = ""
+    flag = session.pop("flag", False)
+    if "content" in request.form:
+        form = "new_lesson_form"
+    elif "description" in request.form:
+        form = "new_course_form"
+
+    if form == "new_lesson_form" and new_lesson_form.validate_on_submit():
+        lesson_slug = str(new_lesson_form.slug.data).replace(" ", "-")
         course = new_lesson_form.course.data
         lesson = Lesson(
             title=new_lesson_form.title.data,
             content=new_lesson_form.content.data,
-            slug=new_lesson_form.slug.data,
+            slug=lesson_slug,
             author=current_user,
-            course_name=course)
+            course_name=course,
+        )
         db.session.add(lesson)
         db.session.commit()
-        flash("your lesson has been Created! ","success")
-        return redirect(url_for("home"))
-    return render_template(
+        flash("Your lesson has been created!", "success")
+        return redirect(url_for("new_lesson"))
+
+    elif form == "new_course_form" and new_course_form.validate_on_submit():
+        course_title = str(new_course_form.title.data).replace(" ", "-")
+        course = Course(
+            title=course_title,
+            description=new_course_form.description.data,
+        )
+        db.session.add(course)
+        db.session.commit()
+        session["flag"] = True
+        flash("New Course has been created!", "success")
+        return redirect(url_for("dashboard"))
+
+    modal = None if flag else "newCourse"
+    return render_template_modal(
         "new_lesson.html",
         title="New Lesson",
         new_lesson_form=new_lesson_form,
+        new_course_form=new_course_form,
         active_tab="new_lesson",
+        modal=modal,
     )

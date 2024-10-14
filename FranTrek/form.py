@@ -106,3 +106,10 @@ class NewLessonForm(FlaskForm):
         "Thumbnail", validators=[DataRequired(), FileAllowed(["jpg", "png"])]
     )
     submit = SubmitField("Post")
+    
+
+class NewCourseForm(FlaskForm):
+    title=StringField("Course Name",validators=[DataRequired(),Length(max=150)])
+    description= TextAreaField("Course Description",validators=[DataRequired(),Length(max=150)])
+    icon = FileField("Icon",validators=[DataRequired(),FileAllowed(["jpg","png"])])
+    submit = SubmitField("Create")
