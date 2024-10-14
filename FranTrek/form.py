@@ -84,14 +84,25 @@ class UpdateProfileForm(FlaskForm):
                 raise ValidationError(
                     "Email already exists! Please chosse a different one"
                 )
+
 def choice_query():
     return Course.query
+
+
 class NewLessonForm(FlaskForm):
     course = QuerySelectField("Course", query_factory=choice_query, get_label="title")
-    title = StringField("Lsson Title",validators=[DataRequired() , Length(max=100)])
-    slug = StringField("Slug",validators=[DataRequired(),Length(max=32)], render_kw={
+    title = StringField("Lesson Title", validators=[DataRequired(), Length(max=100)])
+    slug = StringField(
+        "Slug",
+        validators=[DataRequired(), Length(max=32)],
+        render_kw={
             "placeholder": "Descriptive short version of your title. SEO friendly"
-        })
-    content = CKEditorField("Lesson Content", validators=[DataRequired()], render_kw={"rows": "20"})
-    thumbnail = FileField("thumbnail",validators=[DataRequired(),FileAllowed('jpg','png)')])
-    submit = SubmitField("Lesson")
+        },
+    )
+    content = CKEditorField(
+        "Lesson Content", validators=[DataRequired()], render_kw={"rows": "20"}
+    )
+    thumbnail = FileField(
+        "Thumbnail", validators=[DataRequired(), FileAllowed(["jpg", "png"])]
+    )
+    submit = SubmitField("Post")
