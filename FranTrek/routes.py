@@ -1,10 +1,9 @@
-from flask import Markup 
 import secrets
 from PIL import Image
 import os
 from FranTrek.models import User, Lesson, Course
 from flask import render_template, url_for, flash, redirect, request, session
-from FranTrek.form import (
+from FranTrek.forms import (
     NewCourseForm,
     NewLessonForm,
     RegistrationForm,
@@ -218,7 +217,7 @@ def profile():
 def new_lesson():
     new_lesson_form = NewLessonForm()
     new_course_form = NewCourseForm()
-    form = ' '
+    form = ""
     flag = session.pop("flag", False)
     if "content" in request.form:
         form = "new_lesson_form"
@@ -259,4 +258,4 @@ def new_lesson():
         new_lesson_form=new_lesson_form,
         new_course_form=new_course_form,
         active_tab="new_lesson",
-        modals=modal)
+        modal=modal)
