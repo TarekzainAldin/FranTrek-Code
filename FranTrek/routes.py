@@ -258,4 +258,5 @@ def new_lesson():
         new_lesson_form=new_lesson_form,
         new_course_form=new_course_form,
         active_tab="new_lesson",
-        modal=modal)
+        modal=modal,
+    )
