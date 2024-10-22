@@ -13,6 +13,7 @@ app.config[
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///FranTrek.db'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
 app.config['CKEDITOR_ENABLE_CODESNIPPET'] = True
+app.config['CKEDITOR_FILE_UPLOADER'] = 'upload'
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 migrate = Migrate(app, db)
