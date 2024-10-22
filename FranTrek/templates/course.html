@@ -17,7 +17,7 @@
         <div class="row mb-5 ">
         </div>
         <div class="row">
-            {% for lesson in course.lessons %}
+            {% for lesson in lessons.items %}
             <div class="col-sm-12 col-md-6 col-lg-4 pb-5 d-flex align-items-stretch">
                 <div class="card lesson">
                     <img src="{{url_for('static', filename='lesson_thumbnails/'+lesson.thumbnail)}}" class="card-img">
@@ -28,7 +28,8 @@
                         </h5>
                         <span><img class="article-img rounded-circle"
                                 src="{{url_for('static', filename='user_pics/'+lesson.author.image_file)}}" alt="">By:
-                            <a href="#" class="link">{{lesson.author.username}}</a></span>
+                            <a href="{{url_for('author', username=lesson.author.username)}}"
+                                class="link">{{lesson.author.username}}</a></span>
                         <span class="text-muted">On: {{lesson.date_posted.strftime('%Y-%m-%d')}}</span>
 
                     </div>
@@ -36,6 +37,28 @@
             </div>
             {% endfor %}
 
+            <!-- pagination links -->
+            <nav class="mt-5" aria-label="...">
+                <ul class="pagination" style="display: flex; justify-content: flex-end">
+                    {% for page_num in lessons.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                    {% if page_num %}
+                    {% if lessons.page == page_num %}
+                    <li class="page-item active">
+                        <a href="{{url_for('course', course_title=course.title, page=page_num)}}"
+                            class="page-link">{{page_num}}</a>
+                    </li>
+                    {%else%}
+                    <li class="page-item">
+                        <a href="{{url_for('course', course_title=course.title, page=page_num)}}"
+                            class="page-link">{{page_num}}</a>
+                    </li>
+                    {%endif%}
+                    {% else %}
+                    <span class="mx-2">...</span>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+            </nav>
         </div>
     </div>
 </section>

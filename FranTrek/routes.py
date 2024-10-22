@@ -56,27 +56,32 @@ def delete_picture(picture_name, path):
         pass
 
 
-@app.route('/files/<path:filename>')
+@app.route("/files/<path:filename>")
 def uploaded_files(filename):
-    path = os.path.join(app.root_path, 'static/media')
+    path = os.path.join(app.root_path, "static/media")
     return send_from_directory(path, filename)
 
-@app.route('/upload', methods=['POST'])
+
+@app.route("/upload", methods=["POST"])
 def upload():
-    f = request.files.get('upload')
-    extension = f.filename.split('.')[-1].lower()
-    if extension not in ['jpg', 'gif', 'png', 'jpeg']:
-        return upload_fail(message='File extension not allowed!')
+    f = request.files.get("upload")
+    extension = f.filename.split(".")[-1].lower()
+    if extension not in ["jpg", "gif", "png", "jpeg"]:
+        return upload_fail(message="File extension not allowed!")
     random_hex = secrets.token_hex(8)
-    image_name = random_hex+extension
-    f.save(os.path.join(app.root_path, 'static/media', image_name))
-    url = url_for('uploaded_files', filename=image_name)
-    return upload_success(url, filename=image_name)    
+    image_name = random_hex + extension
+    f.save(os.path.join(app.root_path, "static/media", image_name))
+    url = url_for("uploaded_files", filename=image_name)
+    return upload_success(url, filename=image_name)
+
+
 @app.route("/")
 @app.route("/home")
 def home():
-    lessons = Lesson.query.all()
-    courses = Course.query.all()
+    lessons = Lesson.query.order_by(Lesson.date_posted.desc()).paginate(
+        page=1, per_page=6
+    )
+    courses = Course.query.paginate(page=1, per_page=6)
     return render_template("home.html", lessons=lessons, courses=courses)
 
 
@@ -248,16 +253,22 @@ def course(course_title):
     course = Course.query.filter_by(title=course_title).first()
     course_id = course.id if course else None
     course = Course.query.get_or_404(course_id)
+    page = request.args.get("page", 1, type=int)
+    lessons = Lesson.query.filter_by(course_id=course_id).paginate(
+        page=page, per_page=6
+    )
     return render_template(
         "course.html",
         title=course.title,
         course=course,
+        lessons=lessons,
     )
 
 
 @app.route("/courses")
 def courses():
-    courses = Course.query.all()
+    page = request.args.get("page", 1, type=int)
+    courses = Course.query.paginate(page=page, per_page=6)
     return render_template("courses.html", title="Courses", courses=courses)
 
 
@@ -317,3 +328,15 @@ def delete_lesson(lesson_id):
     db.session.commit()
     flash("Your lesson has been deleted!", "success")
     return redirect(url_for("user_lessons"))
+
+
+@app.route("/author/<string:username>", methods=["GET"])
+def author(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    page = request.args.get('page', 1, type=int)
+    lessons = (
+        Lesson.query.filter_by(author=user)
+        .order_by(Lesson.date_posted.desc())
+        .paginate(page=page, per_page=6)
+    )
+    return render_template('author.html', lessons=lessons, user=user)
