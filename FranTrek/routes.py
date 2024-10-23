@@ -10,9 +10,9 @@ from FranTrek.forms import (
     NewLessonForm,
     RegistrationForm,
     LoginForm,
-    RequestResetForm,
     UpdateProfileForm,
     LessonUpdateForm,
+    RequestResetForm,
     ResetPasswordForm,
 )
 from FranTrek import app, bcrypt, db, mail
@@ -62,7 +62,7 @@ def send_reset_email(user):
     token = user.get_reset_token()
     msg = Message(
         "FranTrek App Password Reset Request",
-        sender="tarekzindin@gmail.com",
+        sender="frantrek7@gmail.com",
         recipients=[user.email],
         body=f"""To reset your password, visit the following link:
         {url_for('reset_password', token=token, _external=True)}

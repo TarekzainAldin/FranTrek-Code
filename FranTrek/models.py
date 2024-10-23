@@ -1,7 +1,8 @@
 from datetime import datetime
+import re
 from FranTrek import db, login_manager , app
 from flask_login import UserMixin
-from itsdangerous import URLSafeSerializer as Serializer
+from itsdangerous import URLSafeTimedSerializer as Serializer
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
