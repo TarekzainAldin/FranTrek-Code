@@ -3,16 +3,19 @@ from PIL import Image
 import os
 from FranTrek.models import User, Lesson, Course
 from flask_ckeditor import upload_success, upload_fail
+from flask_mail import Message
 from flask import render_template, url_for, flash, redirect, request, session, abort, send_from_directory
 from FranTrek.forms import (
     NewCourseForm,
     NewLessonForm,
     RegistrationForm,
     LoginForm,
+    RequestResetForm,
     UpdateProfileForm,
     LessonUpdateForm,
+    ResetPasswordForm,
 )
-from FranTrek import app, bcrypt, db
+from FranTrek import app, bcrypt, db, mail
 from flask_modals import render_template_modal
 from flask_login import (
     login_required,
@@ -55,6 +58,18 @@ def delete_picture(picture_name, path):
     except:
         pass
 
+def send_reset_email(user):
+    token = user.get_reset_token()
+    msg = Message(
+        "FranTrek App Password Reset Request",
+        sender="tarekzindin@gmail.com",
+        recipients=[user.email],
+        body=f"""To reset your password, visit the following link:
+        {url_for('reset_password', token=token, _external=True)}
+        
+        if you did not make this request, please ignore this email.""",
+    )
+    mail.send(msg)
 
 @app.route("/files/<path:filename>")
 def uploaded_files(filename):
@@ -340,3 +355,39 @@ def author(username):
         .paginate(page=page, per_page=6)
     )
     return render_template('author.html', lessons=lessons, user=user)
+
+@app.route("/reset_password", methods=["GET", "POST"])
+def reset_request():
+    if current_user.is_authenticated:
+        return redirect(url_for("home"))
+    form = RequestResetForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user:
+            send_reset_email(user)
+        flash(
+            "If this account exists, you will receive an email with instructions",
+            "info",
+        )
+        return redirect(url_for("login"))
+    return render_template("reset_request.html", title="Reset Password", form=form)
+
+
+@app.route("/reset_password/<token>", methods=["GET", "POST"])
+def reset_password(token):
+    if current_user.is_authenticated:
+        return redirect(url_for("home"))
+    user = User.verify_reset_token(token)
+    if not user:
+        flash("The token is invalid or expired", "warning")
+        return redirect(url_for("reset_request"))
+    form = ResetPasswordForm()
+    if form.validate_on_submit():
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode(
+            "utf-8"
+        )
+        user.password = hashed_password
+        db.session.commit()
+        flash(f"Your password has been updated. You can now log in", "success")
+        return redirect(url_for("login"))
+    return render_template("reset_password.html", title="Reset Password", form=form)
