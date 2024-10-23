@@ -30,5 +30,4 @@ app.config["MAIL_USE_TLS"] = True
 app.config["MAIL_USERNAME"] = os.environ.get("EMAIL_USER")
 app.config["MAIL_PASSWORD"] = os.environ.get("EMAIL_PASS")
 mail = Mail(app)
-mail=Mail(app)
 from FranTrek import routes

@@ -3,6 +3,8 @@ import re
 from FranTrek import db, login_manager , app
 from flask_login import UserMixin
 from itsdangerous import URLSafeTimedSerializer as Serializer
+
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
@@ -19,7 +21,6 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(60), nullable=False)
     lessons = db.relationship("Lesson", backref="author", lazy=True)
 
-
     def get_reset_token(self):
         s = Serializer(app.config['SECRET_KEY'], salt='pw-reset')
         return s.dumps({'user_id': self.id})
@@ -33,7 +34,6 @@ class User(db.Model, UserMixin):
             return None
         return User.query.get(user_id)
 
-    
     def __repr__(self):
         return f"User('{self.fname}', '{self.lname}', '{self.username}', '{self.email}', '{self.image_file}')"
 

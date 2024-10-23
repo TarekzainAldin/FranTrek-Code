@@ -58,6 +58,7 @@ def delete_picture(picture_name, path):
     except:
         pass
 
+
 def send_reset_email(user):
     token = user.get_reset_token()
     msg = Message(
@@ -70,6 +71,7 @@ def send_reset_email(user):
         if you did not make this request, please ignore this email.""",
     )
     mail.send(msg)
+
 
 @app.route("/files/<path:filename>")
 def uploaded_files(filename):
@@ -348,13 +350,14 @@ def delete_lesson(lesson_id):
 @app.route("/author/<string:username>", methods=["GET"])
 def author(username):
     user = User.query.filter_by(username=username).first_or_404()
-    page = request.args.get('page', 1, type=int)
+    page = request.args.get("page", 1, type=int)
     lessons = (
         Lesson.query.filter_by(author=user)
         .order_by(Lesson.date_posted.desc())
         .paginate(page=page, per_page=6)
     )
-    return render_template('author.html', lessons=lessons, user=user)
+    return render_template("author.html", lessons=lessons, user=user)
+
 
 @app.route("/reset_password", methods=["GET", "POST"])
 def reset_request():
