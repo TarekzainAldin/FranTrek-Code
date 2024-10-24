@@ -126,3 +126,10 @@ if __name__ == "__main__":
 #  A123!!@aa
 # T123!!@tt
 # F123!!@ff 
+# cbpr tqgr ptwg siak
+# zisk luzl baod yqae
+
+
+
+# frantrek code 
+# xslb okdn wktc dvkd
