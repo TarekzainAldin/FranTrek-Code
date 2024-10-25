@@ -36,10 +36,12 @@ def create_app(config_calss=Config):
     from FranTrek.users.routes import users
     from FranTrek.lessons.routes import lessons
     from FranTrek.courses.routes import courses_bp
+    from FranTrek.errors.handlers import errors
 
     app.register_blueprint(main)
     app.register_blueprint(users)
     app.register_blueprint(lessons)
     app.register_blueprint(courses_bp)
+    app.register_blueprint(errors)
 
     return app
