@@ -133,3 +133,7 @@ if __name__ == "__main__":
 
 # frantrek code 
 # xslb okdn wktc dvkd
+
+
+# Francode busnis
+# adhc wznv tmpg mgdt
