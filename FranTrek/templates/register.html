@@ -1,6 +1,6 @@
 {%extends "layout.html"%}
 {% block content%}
-<div class="container mt-auto align-items-center  p-5 p-lg-0 pt-lg-5">
+<div class="container mt-auto align-items-center">
     <form action="" method="POST">
         {{ form.hidden_tag()}}
         <fieldset class="form-group">
@@ -8,10 +8,7 @@
             <div class="form-group">
                 {{ form.fname.label(class='form-control-label')}}
                 {% if form.fname.errors%}
-
-               
                 {{ form.fname(class='form-control form-control-lg is-invalid')}}
-               
                 <div class="invalid-feedback">
                     {% for error in form.fname.errors %}
                     <span>{{error}}</span>
@@ -100,7 +97,7 @@
     <div class="broder-top pt-3">
         <small class="text-muted">
             Already have an Account?
-            <a href="{{url_for('login')}}" class="ml-2">Sign in</a>
+            <a href="{{url_for('users.login')}}" class="ml-2">Sign in</a>
         </small>
     </div>
 </div>
