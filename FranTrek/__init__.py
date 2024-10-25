@@ -25,9 +25,9 @@ mail = Mail(app)
 from FranTrek.main.routes import main 
 from FranTrek.users.routes import users
 from FranTrek.lessons.routes import lessons
-from FranTrek.courses.routes import courses_pb
+from FranTrek.courses.routes import courses_bp
 
 app.register_blueprint(main)
 app.register_blueprint(users)
 app.register_blueprint(lessons)
-app.register_blueprint(courses_pb)
+app.register_blueprint(courses_bp)
