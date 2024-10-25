@@ -27,7 +27,9 @@ login_manager.login_message_category = "info"
 app.config["MAIL_SERVER"] = "smtp.googlemail.com"
 app.config["MAIL_PORT"] = 587
 app.config["MAIL_USE_TLS"] = True
-app.config["MAIL_USERNAME"] = os.environ.get("EMAIL_USER")
-app.config["MAIL_PASSWORD"] = os.environ.get("EMAIL_PASSWORD")
+app.config['MAIL_USERNAME'] = 'frantrekcode@gmail.com'
+app.config['MAIL_PASSWORD'] = 'bfjg bwzs ujco ebzj'
+# app.config["MAIL_USERNAME"] = os.environ.get("EMAIL_USER")
+# app.config["MAIL_PASSWORD"] = os.environ.get("EMAIL_PASS")
 mail = Mail(app)
 from FranTrek import routes

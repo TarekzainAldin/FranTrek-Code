@@ -124,7 +124,7 @@ if __name__ == "__main__":
     #    db.create_all()  
  app.run(debug=True) 
 #  A123!!@aa
-# T123!!@tt
+# TT123!!@tt
 # F123!!@ff 
 # cbpr tqgr ptwg siak
 # zisk luzl baod yqae
@@ -137,3 +137,8 @@ if __name__ == "__main__":
 
 # Francode busnis
 # adhc wznv tmpg mgdt
+
+
+
+# flaskapp
+# bfjg bwzs ujco ebzj
