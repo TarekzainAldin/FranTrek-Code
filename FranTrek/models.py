@@ -1,8 +1,8 @@
 from datetime import datetime
-import re
-from FranTrek import db, login_manager , app
+from FranTrek import db, login_manager
 from flask_login import UserMixin
 from itsdangerous import URLSafeTimedSerializer as Serializer
+from flask import current_app
 
 
 @login_manager.user_loader
@@ -22,14 +22,14 @@ class User(db.Model, UserMixin):
     lessons = db.relationship("Lesson", backref="author", lazy=True)
 
     def get_reset_token(self):
-        s = Serializer(app.config['SECRET_KEY'], salt='pw-reset')
-        return s.dumps({'user_id': self.id})
+        s = Serializer(current_app.config["SECRET_KEY"], salt="pw-reset")
+        return s.dumps({"user_id": self.id})
 
     @staticmethod
     def verify_reset_token(token, age=3600):
-        s = Serializer(app.config['SECRET_KEY'], salt='pw-reset')
+        s = Serializer(current_app.config["SECRET_KEY"], salt="pw-reset")
         try:
-            user_id = s.loads(token, max_age=age)['user_id']
+            user_id = s.loads(token, max_age=age)["user_id"]
         except:
             return None
         return User.query.get(user_id)

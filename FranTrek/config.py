@@ -1,5 +1,6 @@
 import os 
-class config:
+
+class Config:
     
   SECRET_KEY= '16c749724f0c2920edea51b1b4e7af80f9a10f2ed97981830c0c9109f2370862'
   SQLALCHEMY_DATABASE_URI = 'sqlite:///FranTrek.db'

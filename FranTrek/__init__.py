@@ -7,27 +7,39 @@ from flask_migrate import Migrate
 from flask_ckeditor import CKEditor
 from flask_modals import Modal
 from flask_mail import Mail
-from FranTrek.config import config
-app = Flask(__name__)
-app.config.from_object(config)
+from FranTrek.config import Config
 
-db = SQLAlchemy(app)
-bcrypt = Bcrypt(app)
-migrate = Migrate(app, db)
-login_manager = LoginManager(app)
-ckeditor = CKEditor(app)
-modal = Modal(app)
+
+db = SQLAlchemy()
+bcrypt = Bcrypt()
+migrate = Migrate(db)
+login_manager = LoginManager()
+ckeditor = CKEditor()
+modal = Modal()
 login_manager.login_view = "users.login"
 login_manager.login_message_category = "info"
+mail = Mail()
 
 
-mail = Mail(app)
-from FranTrek.main.routes import main 
-from FranTrek.users.routes import users
-from FranTrek.lessons.routes import lessons
-from FranTrek.courses.routes import courses_bp
+def create_app(config_calss=Config):
+    app = Flask(__name__)
+    app.config.from_object(Config)
 
-app.register_blueprint(main)
-app.register_blueprint(users)
-app.register_blueprint(lessons)
-app.register_blueprint(courses_bp)
+    db.init_app(app)
+    bcrypt.init_app(app)
+    login_manager.init_app(app)
+    ckeditor.init_app(app)
+    modal.init_app(app)
+    mail.init_app(app)
+
+    from FranTrek.main.routes import main
+    from FranTrek.users.routes import users
+    from FranTrek.lessons.routes import lessons
+    from FranTrek.courses.routes import courses_bp
+
+    app.register_blueprint(main)
+    app.register_blueprint(users)
+    app.register_blueprint(lessons)
+    app.register_blueprint(courses_bp)
+
+    return app
