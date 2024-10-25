@@ -1,3 +1,8 @@
+import secrets
+import os 
+from PIL import Image
+from flask import app 
+
 def save_picture(form_picture, path, output_size=None):
     random_hex = secrets.token_hex(8)
     _, f_ext = os.path.splitext(form_picture.filename)

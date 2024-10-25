@@ -1,26 +1,31 @@
 from flask import Blueprint
-
-from FranTrek.models import  Lesson, Course
-
-from flask import render_template, url_for, flash, redirect, request, session, abort
+from FranTrek.models import Lesson, Course
+from flask import (
+    render_template,
+    url_for,
+    flash,
+    redirect,
+    request,
+    session,
+    abort,
+)
 from FranTrek.lessons.forms import (
-   
     NewLessonForm,
     LessonUpdateForm,
 )
-from FranTrek.courses.forms import  NewCourseForm
-from FranTrek import  db
+from FranTrek.courses.forms import NewCourseForm
+
+from FranTrek import db
 from flask_modals import render_template_modal
 from flask_login import (
     login_required,
     current_user,
-   
 )
 from FranTrek.helpers import save_picture
 from FranTrek.lessons.helpers import get_previous_next_lesson, delete_picture
 
+lessons = Blueprint("lessons", __name__)
 
-lessons= Blueprint('lessons',__name__)
 
 @lessons.route("/dashboard/new_lesson", methods=["GET", "POST"])
 @login_required
@@ -96,6 +101,8 @@ def lesson(lesson_slug, course):
         previous_lesson=previous_lesson,
         next_lesson=next_lesson,
     )
+
+
 @lessons.route("/dashboard/user_lessons", methods=["GET", "POST"])
 @login_required
 def user_lessons():
@@ -126,7 +133,7 @@ def update_lesson(lesson_slug, course):
         db.session.commit()
         flash("Your lesson has been updated!", "success")
         return redirect(
-            url_for("lesson", lesson_slug=lesson.slug, course=lesson.course_name.title)
+            url_for("lessons.lesson", lesson_slug=lesson.slug, course=lesson.course_name.title)
         )
     elif request.method == "GET":
         form.course.data = lesson.course_name.title
@@ -151,4 +158,4 @@ def delete_lesson(lesson_id):
     db.session.delete(lesson)
     db.session.commit()
     flash("Your lesson has been deleted!", "success")
-    return redirect(url_for("user_lessons"))
+    return redirect(url_for("lessons.user_lessons"))

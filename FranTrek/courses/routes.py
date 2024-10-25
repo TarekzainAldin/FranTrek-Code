@@ -1,15 +1,15 @@
-from flask import Blueprint,request
+from flask import Blueprint, request
 
-from FranTrek.models import  Lesson, Course
-from flask import render_template 
-
-
-
-
-courses_pb= Blueprint('courses',__name__)
+from FranTrek.models import Lesson, Course
+from flask import (
+    render_template,
+)
 
 
-@courses_pb.route("/<string:course_title>")
+courses_bp = Blueprint("courses", __name__)
+
+
+@courses_bp.route("/<string:course_title>")
 def course(course_title):
     course = Course.query.filter_by(title=course_title).first()
     course_id = course.id if course else None
@@ -26,9 +26,8 @@ def course(course_title):
     )
 
 
-@courses_pb.route("/courses")
+@courses_bp.route("/courses")
 def courses():
     page = request.args.get("page", 1, type=int)
     courses = Course.query.paginate(page=page, per_page=6)
     return render_template("courses.html", title="Courses", courses=courses)
-

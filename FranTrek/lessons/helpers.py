@@ -1,5 +1,7 @@
 import os
-from FranTrek import app 
+from flask import current_app
+
+
 def get_previous_next_lesson(lesson):
     course = lesson.course_name
     for lsn in course.lessons:
@@ -14,7 +16,7 @@ def get_previous_next_lesson(lesson):
 
 
 def delete_picture(picture_name, path):
-    picture_path = os.path.join(app.root_path, path, picture_name)
+    picture_path = os.path.join(current_app.root_path, path, picture_name)
     try:
         os.remove(picture_path)
     except:

@@ -1,18 +1,23 @@
 from flask import Blueprint
 import secrets
-
 import os
-from FranTrek.models import  Lesson, Course
+from FranTrek.models import Lesson, Course
 from flask_ckeditor import upload_success, upload_fail
-from flask import render_template, url_for, request,  send_from_directory
-from FranTrek import app
+from flask import (
+    render_template,
+    url_for,
+    request,
+    send_from_directory,
+)
+from flask import current_app
 
 
-main= Blueprint('main',__name__)
+main = Blueprint("main", __name__)
+
 
 @main.route("/files/<path:filename>")
 def uploaded_files(filename):
-    path = os.path.join(app.root_path, "static/media")
+    path = os.path.join(current_app.root_path, "static/media")
     return send_from_directory(path, filename)
 
 
@@ -24,8 +29,8 @@ def upload():
         return upload_fail(message="File extension not allowed!")
     random_hex = secrets.token_hex(8)
     image_name = random_hex + extension
-    f.save(os.path.join(app.root_path, "static/media", image_name))
-    url = url_for("uploaded_files", filename=image_name)
+    f.save(os.path.join(current_app.root_path, "static/media", image_name))
+    url = url_for("main.uploaded_files", filename=image_name)
     return upload_success(url, filename=image_name)
 
 

@@ -1,35 +1,36 @@
 from flask import Blueprint
-
 from FranTrek.models import User, Lesson
-from flask import render_template, url_for, flash, redirect, request
+from flask import (
+    render_template,
+    url_for,
+    flash,
+    redirect,
+    request,
+)
 from FranTrek.users.forms import (
-  
     RegistrationForm,
     LoginForm,
     UpdateProfileForm,
     RequestResetForm,
     ResetPasswordForm,
 )
-from FranTrek import  bcrypt, db
-
+from FranTrek import bcrypt, db
 from flask_login import (
     login_required,
     login_user,
     current_user,
     logout_user,
-    login_required,
 )
 from FranTrek.helpers import save_picture
 from FranTrek.users.helpers import send_reset_email
 
-users = Blueprint('users', __name__)
-
+users = Blueprint("users", __name__)
 
 
 @users.route("/register", methods=["GET", "POST"])
 def register():
     if current_user.is_authenticated:
-        return redirect(url_for("home"))
+        return redirect(url_for("main.home"))
     form = RegistrationForm()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode(
@@ -45,14 +46,14 @@ def register():
         db.session.add(user)
         db.session.commit()
         flash(f"Account created successfully for {form.username.data}", "success")
-        return redirect(url_for("login"))
+        return redirect(url_for("users.login"))
     return render_template("register.html", title="Register", form=form)
 
 
 @users.route("/login", methods=["GET", "POST"])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for("home"))
+        return redirect(url_for("main.home"))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
@@ -60,7 +61,7 @@ def login():
             login_user(user, remember=form.remember.data)
             next_page = request.args.get("next")
             flash("You have been logged in!", "success")
-            return redirect(next_page) if next_page else redirect(url_for("home"))
+            return redirect(next_page) if next_page else redirect(url_for("main.home"))
         else:
             flash("Login Unsuccessful. Please check credentials", "danger")
     return render_template("login.html", title="Login", form=form)
@@ -69,7 +70,7 @@ def login():
 @users.route("/logout")
 def logout():
     logout_user()
-    return redirect(url_for("home"))
+    return redirect(url_for("main.home"))
 
 
 @users.route("/dashboard", methods=["GET"])
@@ -93,7 +94,7 @@ def profile():
         current_user.bio = profile_form.bio.data
         db.session.commit()
         flash("Your profile has been updated", "success")
-        return redirect(url_for("profile"))
+        return redirect(url_for("users.profile"))
     elif request.method == "GET":
         profile_form.username.data = current_user.username
         profile_form.email.data = current_user.email
@@ -123,7 +124,7 @@ def author(username):
 @users.route("/reset_password", methods=["GET", "POST"])
 def reset_request():
     if current_user.is_authenticated:
-        return redirect(url_for("home"))
+        return redirect(url_for("main.home"))
     form = RequestResetForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
@@ -133,18 +134,18 @@ def reset_request():
             "If this account exists, you will receive an email with instructions",
             "info",
         )
-        return redirect(url_for("login"))
+        return redirect(url_for("users.login"))
     return render_template("reset_request.html", title="Reset Password", form=form)
 
 
 @users.route("/reset_password/<token>", methods=["GET", "POST"])
 def reset_password(token):
     if current_user.is_authenticated:
-        return redirect(url_for("home"))
+        return redirect(url_for("main.home"))
     user = User.verify_reset_token(token)
     if not user:
         flash("The token is invalid or expired", "warning")
-        return redirect(url_for("reset_request"))
+        return redirect(url_for("users.reset_request"))
     form = ResetPasswordForm()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode(
@@ -153,5 +154,5 @@ def reset_password(token):
         user.password = hashed_password
         db.session.commit()
         flash(f"Your password has been updated. You can now log in", "success")
-        return redirect(url_for("login"))
+        return redirect(url_for("users.login"))
     return render_template("reset_password.html", title="Reset Password", form=form)

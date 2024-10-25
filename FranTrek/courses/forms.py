@@ -1,17 +1,13 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-
-from FranTrek.models import  Course
-from wtforms import StringField,  SubmitField,  TextAreaField
-
-
+from FranTrek.models import Course
+from wtforms import StringField, SubmitField, TextAreaField
 from wtforms.validators import (
     DataRequired,
     Length,
-
     ValidationError,
-    
 )
+
 
 class NewCourseForm(FlaskForm):
     title = StringField("Course Name", validators=[DataRequired(), Length(max=50)])
@@ -27,4 +23,3 @@ class NewCourseForm(FlaskForm):
             raise ValidationError(
                 "Course name already exists! Please choose a different one"
             )
-

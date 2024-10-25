@@ -3,7 +3,6 @@ from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
 from FranTrek.models import User
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField
-
 from wtforms.validators import (
     DataRequired,
     Length,
@@ -11,7 +10,6 @@ from wtforms.validators import (
     Regexp,
     EqualTo,
     ValidationError,
-    
 )
 
 class RegistrationForm(FlaskForm):
@@ -88,7 +86,6 @@ class UpdateProfileForm(FlaskForm):
                 raise ValidationError(
                     "Email already exists! Please chosse a different one"
                 )
-            
 
 class RequestResetForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])

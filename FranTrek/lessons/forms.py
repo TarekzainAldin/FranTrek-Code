@@ -1,16 +1,12 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-
-from FranTrek.models import  Course
+from FranTrek.models import Course
 from wtforms import StringField, SubmitField
 from wtforms_sqlalchemy.fields import QuerySelectField
 from flask_ckeditor import CKEditorField
-from wtforms.validators import (
-    DataRequired,
-    Length,
-   
-    
-)
+from wtforms.validators import DataRequired, Length
+
+
 def choice_query():
     return Course.query
 
