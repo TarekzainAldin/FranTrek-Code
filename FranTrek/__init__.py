@@ -8,9 +8,7 @@ from flask_ckeditor import CKEditor
 from flask_modals import Modal
 from flask_mail import Mail
 from FranTrek.config import Config
-
-from flask_admin import Admin
-
+from flask_admin import Admin 
 
 db = SQLAlchemy()
 bcrypt = Bcrypt()
