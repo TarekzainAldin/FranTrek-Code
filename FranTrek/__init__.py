@@ -9,6 +9,8 @@ from flask_modals import Modal
 from flask_mail import Mail
 from FranTrek.config import Config
 
+from flask_admin import Admin
+
 
 db = SQLAlchemy()
 bcrypt = Bcrypt()
@@ -19,6 +21,7 @@ modal = Modal()
 login_manager.login_view = "users.login"
 login_manager.login_message_category = "info"
 mail = Mail()
+admin = Admin()
 
 
 def create_app(config_calss=Config):
@@ -31,17 +34,21 @@ def create_app(config_calss=Config):
     ckeditor.init_app(app)
     modal.init_app(app)
     mail.init_app(app)
+    admin.init_app(app)
 
     from FranTrek.main.routes import main
     from FranTrek.users.routes import users
     from FranTrek.lessons.routes import lessons
     from FranTrek.courses.routes import courses_bp
     from FranTrek.errors.handlers import errors
+    from FranTrek.adminbp.routes import adminbp
+
 
     app.register_blueprint(main)
     app.register_blueprint(users)
     app.register_blueprint(lessons)
     app.register_blueprint(courses_bp)
     app.register_blueprint(errors)
+    app.register_blueprint(adminbp)
 
     return app
