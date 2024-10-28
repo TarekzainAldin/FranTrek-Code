@@ -25,6 +25,7 @@ admin = Admin()
 def create_app(config_calss=Config):
     app = Flask(__name__)
     app.config.from_object(Config)
+    from FranTrek.adminbp.routes import MyAdminIndexView
 
     db.init_app(app)
     bcrypt.init_app(app)
@@ -32,7 +33,7 @@ def create_app(config_calss=Config):
     ckeditor.init_app(app)
     modal.init_app(app)
     mail.init_app(app)
-    admin.init_app(app)
+    admin.init_app(app, index_view=MyAdminIndexView())
 
     from FranTrek.main.routes import main
     from FranTrek.users.routes import users
