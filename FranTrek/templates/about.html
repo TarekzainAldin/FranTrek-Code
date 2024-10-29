@@ -1,4 +1,105 @@
 {%extends "layout.html"%}
 {% block content%}
-    <h1>About-Us</h1>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - FranTrek-code</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <style>
+        .profile-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            transition: transform 0.2s;
+        }
+
+        .profile-card:hover {
+            transform: scale(1.05);
+        }
+
+        .platform-info {
+            padding: 40px;
+            background-color: #343a40;
+            color: #ffffff;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        .profile-image {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Platform Description Section -->
+    <section class="platform-info my-5">
+        <div class="container">
+            <h2>Welcome to FranTrek-code!</h2>
+            <p class="lead">
+                FranTrek-code is your go-to platform for learning coding and programming fundamentals. We are dedicated
+                to providing high-quality, accessible, and interactive content to help you advance in the tech industry.
+                Join us to enhance your skills and become a part of a growing community of aspiring developers!
+            </p>
+        </div>
+    </section>
+
+    <!-- Team Profiles Section -->
+    <section class="team-section my-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <!-- Tarek's Profile -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="profile-card text-center">
+                        <img src="{{ url_for('static', filename='tarek.jpg') }}" alt="Tarek's Photo" class="profile-image">
+                        <h3>Tarek Zain Aldin</h3>
+                        <p class="text-muted">Lead Developer & Co-Founder</p>
+                        <p>
+                            With a strong background in web development, Tarek has worked on multiple projects
+                            from designing secure websites to application development using technologies like C#, 
+                            Python, Java, HTML, and CSS. His expertise ranges across front-end and back-end
+                            technologies, as well as mobile and computer repair.
+                        </p>
+                        <a href="mailto:tarekzindin@gmail.com" class="btn btn-primary btn-sm">Contact Tarek</a>
+                    </div>
+                </div>
+                <!-- Francia's Profile -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="profile-card text-center">
+                        <img src="path/to/francia-photo.jpg" alt="Francia's Photo" class="profile-image">
+                        <h3>Francia</h3>
+                        <p class="text-muted">Top Contributor & Content Specialist</p>
+                        <p>
+                            Francia brings creative direction to the FranTrek-code platform, enhancing learning content 
+                            and ensuring a streamlined user experience. She is committed to helping users reach their 
+                            full potential through engaging and practical learning modules.
+                        </p>
+                        <a href="mailto:francia@holberton.com" class="btn btn-primary btn-sm">Contact Francia</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center p-4">
+        <p class="mb-0">&copy; 2024 FranTrek-code. All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
+
 {%endblock content%}

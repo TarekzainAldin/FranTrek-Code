@@ -27,15 +27,22 @@
             </button>
             <div class="collapse navbar-collapse" id="navmenu">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a href="{{url_for('main.about')}}" class="nav-link">About</a>
-                    </li>
+                    
                     <li class="nav-item">
                         {% if request.path=='/home'%}
                         <a href="#learn" class="nav-link">Start Learning</a>
                         {% else %}
                         <a href="{{url_for('courses.courses')}}" class="nav-link">Start Learning</a>
                         {% endif %}
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{url_for('main.about')}}" class="nav-link">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{url_for('main.Roadmap')}}" class="nav-link">Roadmap</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{url_for('main.Contact_us')}}" class="nav-link">Contact_us</a>
                     </li>
                 </ul>
                 <!-- User Links -->

@@ -46,4 +46,14 @@ def home():
 
 @main.route("/about")
 def about():
+
     return render_template("about.html", title="About")
+
+
+@main.route("/Roadmap ")
+def Roadmap():
+    return render_template("Roadmap.html",title="Roadmap")
+
+@main.route("/Contact_us")
+def Contact_us():
+    return render_template("Contact_us.html",title='Contact-us')
