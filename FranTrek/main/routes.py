@@ -2,12 +2,15 @@ from flask import Blueprint
 import secrets
 import os
 from FranTrek.models import Lesson, Course
+from flask_mail import Message
+from FranTrek import mail
 from flask_ckeditor import upload_success, upload_fail
 from flask import (
     render_template,
     url_for,
     request,
     send_from_directory,
+    flash,
 )
 from flask import current_app
 
@@ -54,6 +57,25 @@ def about():
 def Roadmap():
     return render_template("Roadmap.html",title="Roadmap")
 
-@main.route("/Contact_us")
+@main.route('/Contact_us', methods=['GET', 'POST'])
 def Contact_us():
-    return render_template("Contact_us.html",title='Contact-us')
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+        message = request.form['message']
+
+        # Compose the email
+        msg = Message(
+            subject=f"Contact Form Message from {name}",
+            sender=current_app.config['MAIL_USERNAME'],
+            recipients=['frantrekcode@gmail.com'],  # Replace with your email address
+            body=f"Name: {name}\nEmail: {email}\n\nMessage:\n{message}"
+        )
+
+        try:
+            mail.send(msg)
+            flash("Message sent successfully!", "success")
+        except Exception as e:
+            flash(f"Failed to send message: {str(e)}", "danger")
+
+    return render_template('Contact_us.html')
