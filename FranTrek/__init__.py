@@ -9,6 +9,7 @@ from flask_modals import Modal
 from flask_mail import Mail
 from FranTrek.config import Config
 from flask_admin import Admin 
+from flask_cors import CORS
 
 db = SQLAlchemy()
 bcrypt = Bcrypt()
@@ -25,6 +26,7 @@ admin = Admin()
 def create_app(config_calss=Config):
     app = Flask(__name__)
     app.config.from_object(Config)
+    CORS(app)
     from FranTrek.adminbp.routes import MyAdminIndexView
 
     db.init_app(app)
@@ -41,7 +43,7 @@ def create_app(config_calss=Config):
     from FranTrek.courses.routes import courses_bp
     from FranTrek.errors.handlers import errors
     from FranTrek.adminbp.routes import adminbp
-
+    from FranTrek.users.user_api import users_api 
 
     app.register_blueprint(main)
     app.register_blueprint(users)
@@ -49,5 +51,8 @@ def create_app(config_calss=Config):
     app.register_blueprint(courses_bp)
     app.register_blueprint(errors)
     app.register_blueprint(adminbp)
+    app.register_blueprint(users_api, url_prefix='/api')
+
+
 
     return app
