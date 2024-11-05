@@ -13,3 +13,10 @@ def save_picture(form_picture, path, output_size=None):
         i.thumbnail(output_size)
     i.save(picture_path)
     return picture_name
+
+def delete_picture(picture_name, path):
+    picture_path = os.path.join(current_app.root_path, path, picture_name)
+    try:
+        os.remove(picture_path)
+    except:
+        pass

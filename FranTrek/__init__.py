@@ -44,6 +44,7 @@ def create_app(config_calss=Config):
     from FranTrek.errors.handlers import errors
     from FranTrek.adminbp.routes import adminbp
     from FranTrek.users.user_api import users_api 
+    from FranTrek.lessons.lessons_api import lessons_api
 
     app.register_blueprint(main)
     app.register_blueprint(users)
@@ -52,6 +53,7 @@ def create_app(config_calss=Config):
     app.register_blueprint(errors)
     app.register_blueprint(adminbp)
     app.register_blueprint(users_api, url_prefix='/api')
+    app.register_blueprint(lessons_api, url_prefix='/api')
 
 
 
