@@ -43,7 +43,7 @@ FranTrek-Code is a learning management system that allows instructors to create 
 ```bash
 git clone https://github.com/TarekzainAldin/FranTrek-Code.git
 cd FranTrek-Code
-
+``` 
 
 Create a Virtual Environment
 
