@@ -46,16 +46,16 @@ cd FranTrek-Code
 ``` 
 
 Create a Virtual Environment
-
+```bash
 python -m venv venv
 source venv/bin/activate  # On macOS/Linux
 venv\Scripts\activate     # On Windows
-
+```
 
 Install Dependencies
-
+```bash
 pip install -r requirements.txt
-
+```
 
 Set Up Environment Variables
 Create a .env file in the root directory and add the following:
@@ -170,7 +170,7 @@ bash
 Copy code
 flask run
 Visit http://127.0.0.1:5000 to see the application in action.
-
+```
 Folder Structure
 FranTrek-Code/
 │
