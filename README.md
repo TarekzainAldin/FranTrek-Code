@@ -1,50 +1,60 @@
-FranTrek-Code
-FranTrek-Code is a Flask-based web application designed to manage and administer courses and lessons efficiently. The project features user authentication, a content management system, a RESTful API for managing data, and an admin dashboard for administration.
+# FranTrek-Code
 
-Table of Contents
-Project Overview
-Technologies Used
-Setup Instructions
-Folder Structure
-Features
-Usage
-API Endpoints
-Future Enhancements
-Contributing
-License
-Project Overview
+**FranTrek-Code** is a Flask-based web application designed to manage and administer courses and lessons efficiently. The project features user authentication, a content management system, a RESTful API for managing data, and an admin dashboard for administration.
+
+---
+
+## Table of Contents
+1. [Project Overview](#project-overview)
+2. [Technologies Used](#technologies-used)
+3. [Setup Instructions](#setup-instructions)
+4. [Folder Structure](#folder-structure)
+5. [Features](#features)
+6. [Usage](#usage)
+7. [API Endpoints](#api-endpoints)
+8. [Future Enhancements](#future-enhancements)
+9. [Contributing](#contributing)
+10. [License](#license)
+11. [Acknowledgments](#acknowledgments)
+
+---
+
+## Project Overview
 FranTrek-Code is a learning management system that allows instructors to create and manage courses and lessons. Users can register, log in, view course content, and receive notifications for lesson updates. The project uses Flask for the backend and integrates several extensions for enhanced functionality.
 
-Technologies Used
-Backend Framework: Flask
-Database: SQLAlchemy (with Flask-Migrate for database migrations)
-Authentication: Flask-Login, Flask-Bcrypt
-Admin Interface: Flask-Admin
-API Management: Flask-Cors, RESTful Blueprints
-Rich Text Editing: Flask-CKEditor
-Email Handling: Flask-Mail
-Frontend: Jinja2 Templates
-Other Libraries: WTForms, Pillow (for image handling), Mako, Alembic
-Setup Instructions
-Clone the Repository:
+---
 
-bash
-Copy code
+## Technologies Used
+- **Backend Framework**: Flask
+- **Database**: SQLAlchemy (with Flask-Migrate for database migrations)
+- **Authentication**: Flask-Login, Flask-Bcrypt
+- **Admin Interface**: Flask-Admin
+- **API Management**: Flask-Cors, RESTful Blueprints
+- **Rich Text Editing**: Flask-CKEditor
+- **Email Handling**: Flask-Mail
+- **Frontend**: Jinja2 Templates
+- **Other Libraries**: WTForms, Pillow (for image handling), Mako, Alembic
+
+---
+
+## Setup Instructions
+
+### Clone the Repository
+```bash
 git clone https://github.com/TarekzainAldin/FranTrek-Code.git
 cd FranTrek-Code
-Create a Virtual Environment:
-
+Create a Virtual Environment
 bash
 Copy code
 python -m venv venv
 source venv/bin/activate  # On macOS/Linux
 venv\Scripts\activate     # On Windows
-Install Dependencies:
-
+Install Dependencies
 bash
 Copy code
 pip install -r requirements.txt
-Set Up Environment Variables: Create a .env file in the root directory and add the following:
+Set Up Environment Variables
+Create a .env file in the root directory and add the following:
 
 env
 Copy code
@@ -57,15 +67,13 @@ MAIL_PORT=587
 MAIL_USE_TLS=True
 MAIL_USERNAME=your_email
 MAIL_PASSWORD=your_email_password
-Database Migration:
-
+Database Migration
 bash
 Copy code
 flask db init
 flask db migrate
 flask db upgrade
-Run the Application:
-
+Run the Application
 bash
 Copy code
 flask run
@@ -137,5 +145,3 @@ Open a Pull Request.
 License
 This project is licensed under the MIT License.
 
-Acknowledgments
-Special thanks to all contributors, mentors, and the open-source community for their support.
