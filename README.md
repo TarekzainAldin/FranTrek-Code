@@ -78,7 +78,7 @@ bash
 Copy code
 flask run
 Visit http://127.0.0.1:5000 to see the application in action.
-
+## folder structure)
 Folder Structure
 markdown
 Copy code
