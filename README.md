@@ -38,8 +38,9 @@ FranTrek-Code is a learning management system that allows instructors to create 
 ---
 
 ## Setup Instructions
-
+---
 ### Clone the Repository
+---
 ```bash
 git clone https://github.com/TarekzainAldin/FranTrek-Code.git
 cd FranTrek-Code
@@ -55,7 +56,7 @@ Copy code
 pip install -r requirements.txt
 Set Up Environment Variables
 Create a .env file in the root directory and add the following:
-
+---
 env
 Copy code
 FLASK_APP=run.py
@@ -78,8 +79,8 @@ bash
 Copy code
 flask run
 Visit http://127.0.0.1:5000 to see the application in action.
-
-
+---
+---
 ## Folder Structure
 Folder Structure
 markdown
@@ -114,6 +115,7 @@ FranTrek-Code/
 ├── .env
 ├── requirements.txt
 └── run.py
+---
 Features
 User Authentication: Registration, login, password reset via email, and user profile management.
 Admin Dashboard: Manage users, courses, and lessons through a rich interface.
