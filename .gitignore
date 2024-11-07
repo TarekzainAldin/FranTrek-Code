@@ -1,21 +1,21 @@
 # Byte-compiled / optimized / DLL files
 **/__pycache__/
+*.py[cod]
+*.so
+
+# Virtual environments
 **/venv/
 **/env/
-.env
-**/.env
 
 # Distribution / packaging
 *.egg-info/
 dist/
 build/
 
-# Flask config
-instance/
-.env
+# Flask / Django config
+**/instance/
+**/.env
 
 # System files
 .DS_Store
 Thumbs.db
-
-
