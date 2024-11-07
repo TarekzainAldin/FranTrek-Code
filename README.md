@@ -93,3 +93,38 @@ Copy code
 flask run
 Visit http://127.0.0.1:5000 in your browser to view the application.
 ##Folder Structure
+Folder Structure
+The project’s folder structure is as follows:
+
+markdown
+Copy code
+FranTrek-Code/
+│
+├── FranTrek/
+│   ├── __init__.py
+│   ├── config.py
+│   ├── models.py
+│   ├── adminbp/
+│   │   ├── __init__.py
+│   │   └── routes.py
+│   ├── main/
+│   │   ├── __init__.py
+│   │   └── routes.py
+│   ├── users/
+│   │   ├── __init__.py
+│   │   ├── routes.py
+│   │   └── user_api.py
+│   ├── courses/
+│   │   ├── __init__.py
+│   │   ├── routes.py
+│   │   └── courses_api.py
+│   └── errors/
+│       ├── __init__.py
+│       └── handlers.py
+│
+├── migrations/
+├── static/
+├── templates/
+├── .env
+├── requirements.txt
+└── run.py
