@@ -38,3 +38,58 @@ Clone the project repository to your local machine:
 git clone https://github.com/TarekzainAldin/FranTrek-Code.git
 cd FranTrek-Code
 ```
+
+Create a Virtual Environment
+It is recommended to use a virtual environment for dependency management:
+
+bash
+Copy code
+python -m venv venv
+Activate the virtual environment:
+
+On macOS/Linux:
+bash
+Copy code
+source venv/bin/activate
+On Windows:
+bash
+Copy code
+venv\Scripts\activate
+Install Dependencies
+With the virtual environment activated, install the required dependencies:
+
+bash
+Copy code
+pip install -r requirements.txt
+Set Up Environment Variables
+Create a .env file in the root directory and add the following environment variables:
+
+ini
+Copy code
+FLASK_APP=run.py
+FLASK_ENV=development
+SECRET_KEY=your_secret_key
+SQLALCHEMY_DATABASE_URI=sqlite:///site.db
+MAIL_SERVER=smtp.yourmailserver.com
+MAIL_PORT=587
+MAIL_USE_TLS=True
+MAIL_USERNAME=your_email
+MAIL_PASSWORD=your_email_password
+Replace your_secret_key, your_email, and your_email_password with actual values.
+
+Database Migration
+Initialize and migrate the database:
+
+bash
+Copy code
+flask db init
+flask db migrate
+flask db upgrade
+Run the Application
+Start the application:
+
+bash
+Copy code
+flask run
+Visit http://127.0.0.1:5000 in your browser to view the application.
+##Folder Structure
