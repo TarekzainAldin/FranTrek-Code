@@ -128,3 +128,54 @@ FranTrek-Code/
 ├── .env
 ├── requirements.txt
 └── run.py
+Features
+User Authentication: Allows users to register, log in, reset passwords via email, and manage profiles.
+Admin Dashboard: Admins can manage users, courses, and lessons through an intuitive interface.
+Course & Lesson Management: Instructors can create, update, and delete courses and lessons using a rich text editor.
+RESTful API: Secure API endpoints for interacting with user, course, and lesson data.
+Email Notifications: Automated email notifications for password resets and updates.
+Modal Support: Rich modals for user interactions via Flask-Modals.
+CORS Support: Enabled through Flask-Cors for external API access.
+Usage
+User Authentication: Users can register, log in, and reset passwords.
+Admin Interface: Admin users can manage courses, lessons, and users.
+Course Access: Students can browse and view lessons.
+Interactive API: Test API endpoints using tools like Postman.
+API Endpoints
+The following API endpoints are available:
+
+User API: /api/users
+Lesson API: /api/lessons
+Course API: /api/courses
+For detailed API documentation, refer to the user_api.py, lessons_api.py, and courses_api.py files in the project.
+
+Future Enhancements
+Role-Based Access Control: Implement permissions for instructors and students.
+Enhanced UI: Upgrade to modern front-end frameworks like React or Vue.js for a richer user experience.
+Mobile Support: Make the application mobile-responsive.
+Analytics: Track user engagement and course completion rates.
+Contributing
+To contribute to FranTrek-Code:
+
+Fork the Project: Create a personal copy of the repository.
+Create a Feature Branch:
+bash
+Copy code
+git checkout -b feature-name
+Commit Your Changes:
+bash
+Copy code
+git commit -m 'Add new feature'
+Push to the Branch:
+bash
+Copy code
+git push origin feature-name
+Open a Pull Request: Submit a pull request from your feature branch to the main repository.
+License
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+Acknowledgments
+The Flask framework and community for their support and tools.
+Libraries including SQLAlchemy, Flask-Admin, Flask-Login, and others used in this project.
+GitHub Repository
+Find the project on GitHub: FranTrek-Code GitHub Repository
