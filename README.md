@@ -32,21 +32,18 @@ FranTrek-Code is a learning management system (LMS) that enables instructors to 
 
 ## Setup Instructions
 
-### Clone the Repository
-Clone the project repository to your local machine:
+### 1. Clone the Repository
+To begin, clone the project repository to your local machine:
 ```bash
 git clone https://github.com/TarekzainAldin/FranTrek-Code.git
 cd FranTrek-Code
-```
-
-Create a Virtual Environment
+2. Create a Virtual Environment
 It is recommended to use a virtual environment for dependency management:
 
 bash
 Copy code
 python -m venv venv
-Activate the virtual environment:
-
+3. Activate the Virtual Environment
 On macOS/Linux:
 bash
 Copy code
@@ -55,13 +52,13 @@ On Windows:
 bash
 Copy code
 venv\Scripts\activate
-Install Dependencies
+4. Install Dependencies
 With the virtual environment activated, install the required dependencies:
 
 bash
 Copy code
 pip install -r requirements.txt
-Set Up Environment Variables
+5. Set Up Environment Variables
 Create a .env file in the root directory and add the following environment variables:
 
 ini
@@ -77,7 +74,7 @@ MAIL_USERNAME=your_email
 MAIL_PASSWORD=your_email_password
 Replace your_secret_key, your_email, and your_email_password with actual values.
 
-Database Migration
+6. Database Migration
 Initialize and migrate the database:
 
 bash
@@ -85,14 +82,14 @@ Copy code
 flask db init
 flask db migrate
 flask db upgrade
-Run the Application
+7. Run the Application
 Start the application:
 
 bash
 Copy code
 flask run
 Visit http://127.0.0.1:5000 in your browser to view the application.
-##Folder Structure
+
 Folder Structure
 The project’s folder structure is as follows:
 
@@ -175,7 +172,7 @@ License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 Acknowledgments
-The Flask framework and community for their support and tools.
-Libraries including SQLAlchemy, Flask-Admin, Flask-Login, and others used in this project.
+Special thanks to the Flask framework and community for their support and tools, as well as the various libraries, including SQLAlchemy, Flask-Admin, Flask-Login, and others used in this project.
+
 GitHub Repository
 Find the project on GitHub: FranTrek-Code GitHub Repository
