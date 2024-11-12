@@ -1,21 +1,5 @@
-# Byte-compiled / optimized / DLL files
-**/__pycache__/
-*.py[cod]
-*.so
+# Ignore virtual environment directory
+venv/
 
-# Virtual environments
-**/venv/
-**/env/
-
-# Distribution / packaging
-*.egg-info/
-dist/
-build/
-
-# Flask / Django config
-**/instance/
-**/.env
-
-# System files
-.DS_Store
-Thumbs.db
+# Ignore Python bytecode cache directories
+__pycache__/
